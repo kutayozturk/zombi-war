@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <fstream>
+
 using namespace std;
+
 
 int zombiOlustur() {
     if (rand() % 67 < 10)
@@ -13,6 +16,21 @@ int zombiOlustur() {
 }
 
 int main() {
+	system("Color 02");
+	// ASCII Dosyası çağırma	
+	ifstream dosyaOku("zombi-ascii.txt");
+ 	string satir = "";
+
+  	if ( dosyaOku.is_open() ){
+
+    while ( getline(dosyaOku, satir) ){
+      cout << satir << endl;
+    }
+
+    dosyaOku.close();
+  }
+
+	// Genel Tanımlamalar
 	setlocale(LC_ALL,"Turkish");
     srand(time(NULL));
     char enter;
@@ -26,11 +44,12 @@ int main() {
     int olenZombi = 0;
 
     // Başlık
-    cout << "Zombie War'a Hoş geldin." << endl << "Başlamak için [ENTER] tuşuna bas.";
+    
+    cout << "\nZombie War'a Hoş geldin." << endl << "Başlamak için [ENTER] tuşuna bas.";
     cin.get();
 
     // Oyuncu Adı
-    cout << "Adınızı Girin: ";
+    cout << "\nAdınızı Girin: ";
     cin >> oyuncuAdi;
 
 	
@@ -38,7 +57,7 @@ int main() {
     cout << "Kaç tane zombiyle savaşmak istiyorsun? ";
     cin >> zombiSayisi;
 
-    cout << "Hayatın için savaşmaya hazır ol, " << oyuncuAdi << "!" << endl;
+    cout << "\nHayatın için savaşmaya hazır ol, " << oyuncuAdi << "!" << endl;
 
     // main game loop
     while (oyuncuHayatta && olenZombi < zombiSayisi) {
